@@ -1,0 +1,16 @@
+extends templates/master
+
+block title
+	| Weibo API Test
+
+block content
+
+	.container
+
+		section
+
+			h1 Weibo API Test Page
+
+			.tile
+				h2 You need to log in and authorise the app before you can use the share buttons
+				a.button.button--large(href="#{authURL}", title="Login to weibo") Login

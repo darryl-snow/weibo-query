@@ -1,0 +1,23 @@
+.tile
+	column(12)
+	background 			white
+	box-shadow 			0 1px 1px rgba(black, 0.2)
+	overflow 			visible
+	padding 			$spacing
+
+	@media $lap
+		column(6)
+		overflow 		visible
+
+	h2
+		margin-top 		0
+
+	&--naked
+		background 		none
+		box-shadow 		none
+
+	&-search-result
+		
+		label:not(:first-of-type)
+			display 	block
+			margin-top 	$spacing * 0.5

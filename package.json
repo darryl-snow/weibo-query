@@ -1,0 +1,29 @@
+{
+  "name": "weibotest",
+  "version": "1.0.0",
+  "description": "An app for authenticating with and testing the Weibo API",
+  "main": "index.coffee",
+  "scripts": {
+    "start": "coffee index.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Weibo",
+    "NodeJS",
+    "ExpressJS",
+    "Oauth"
+  ],
+  "author": "Darryl Snow",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.9.0",
+    "cookie-session": "^1.0.2",
+    "express": "^4.9.5",
+    "express-session": "^1.8.2",
+    "jade": "^1.7.0",
+    "stylus": "^0.49.1",
+    "util": "^0.10.3",
+    "weibo": "^0.6.11",
+    "weibo-mid": "0.0.1"
+  }
+}
