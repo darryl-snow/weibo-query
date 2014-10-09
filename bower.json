@@ -1,0 +1,14 @@
+{
+  "name": "weibotest",
+  "main": "index.coffee",
+  "version": "1.0.0",
+  "authors": [
+    "Darryl Snow <darryl_snow@apple.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "directory": "src/bower_components",
+  "dependencies": {
+    "remodal": "~0.2.0"
+  }
+}
