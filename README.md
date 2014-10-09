@@ -6,12 +6,12 @@ This app allows you to use the Weibo JavaScript SDK to:
 - reply to (comment on) a weibo post
 - forward (share) a weibo post
 - like a weibo post
+- see the exact API requests that are made
 
 ## Requirements
 
 * NodeJS & NPM
 * CoffeeScript (`npm install -g coffee`)
-* [LiveRefresh Chrome extension](https://chrome.google.com/webstore/detail/liverefresh/anjedjjhoempagnghcgbeembkdniplnn) _(optional)_
 
 ## Instructions
 
@@ -21,9 +21,13 @@ This app allows you to use the Weibo JavaScript SDK to:
 npm start
 ```
 
-> Note: you may need to use `sudo` to run the app as it's using port 80
+> Note: you may need to use `sudo` to run the app as it's using port 80. You'll also need to add a line in your hosts file so that a fake domain points to http://localhost - this is because the app settings on weibo require that the app's URL be a valid http://xxx.xxx domain name. Add this line in `/etc/hosts`:
+```
+127.0.0.1 weibotest.com
+```
+Then in the app settings on open.weibo.com, ensure that weibotest.com is set as the app's domain and URL.
 
-* In your browser go to [http://localhost:3000](http://localhost:3000)
+* In your browser go to [http://weibotest.com](http://weibotest.com)
 
 ## Explanation
 
