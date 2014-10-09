@@ -1,6 +1,6 @@
 # Weibo Test
 
-This app allows you to use the Weibo JavaScript SDK to:
+This app allows you to use the Weibo JavaScript SDKs to:
 - authenticate using Oauth2.0
 - query the API to get details about a particular Weibo post
 - reply to (comment on) a weibo post
@@ -10,10 +10,30 @@ This app allows you to use the Weibo JavaScript SDK to:
 
 ## Requirements
 
+* A weibo account
+* A weibo app
 * NodeJS & NPM
 * CoffeeScript (`npm install -g coffee`)
 
-## Instructions
+## Development
+
+* Set your hosts file to point `apple.com to localhost` for testing/development:
+
+```
+sudo echo "127.0.0.1 apple.com" >> /etc/hosts
+```
+
+> NOTE: the domain you use, whether apple.com or not, has to match with the domain used in your app settings on open.weibo.com. Be sure to also change the **oauthCallbackURL** variable on **line 30** of `index.coffee` as well.
+
+* Edit the App Key and App secret in `index.coffee` to match those for your weibo app
+
+* Edit the App Key in `/scripts/weiboTest.js` and `/views/index-loggedin.jade`
+
+* Install dependencies:
+
+```
+npm install
+```
 
 * Run the start command:
 
@@ -21,13 +41,18 @@ This app allows you to use the Weibo JavaScript SDK to:
 npm start
 ```
 
-> Note: you may need to use `sudo` to run the app as it's using port 80. You'll also need to add a line in your hosts file so that a fake domain points to http://localhost - this is because the app settings on weibo require that the app's URL be a valid http://xxx.xxx domain name. Add this line in `/etc/hosts`:
-```
-127.0.0.1 weibotest.com
-```
-Then in the app settings on open.weibo.com, ensure that weibotest.com is set as the app's domain and URL.
+> NOTE: you need to use `sudo` to run the app as it's using port 80. 
 
-* In your browser go to [http://weibotest.com](http://weibotest.com)
+* In your browser go to [http://apple.com](http://apple.com) (or whatever URL you've set in your app details on `open.weibo.com` and in the callback URL in `index.coffee`)
+
+> NOTE: Remember to remove the line in your hosts file when you've finished! :)
+
+## How to use it
+
+* Click the login button to login to weibo and authorise the app
+* Enter the URL of a weibo post in the search bar at the top and then click "go"
+* The weibo post will appear on the left of the page and the request made to the weibo API will appear on the right
+* Click any of the 3 social interaction buttons beneath the post - again the request details will appear on the right of the page
 
 ## Explanation
 

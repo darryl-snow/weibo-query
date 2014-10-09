@@ -322,9 +322,15 @@ img {
   cursor: not-allowed;
   opacity: 0.7;
 }
+.button-share--send-reply {
+  float: right;
+}
 .share-buttons {
   margin-top: 1.5em;
   text-align: center;
+}
+.share-buttons.hidden {
+  margin-top: 0;
 }
 label {
   font-weight: 600;
@@ -386,12 +392,48 @@ label {
 .header .login * {
   vertical-align: middle;
 }
-.input {
+.input,
+textarea {
   border: 1px solid #95a5a6;
   box-shadow: none;
   min-width: 75%;
   padding: 0.75em 1.5em;
   vertical-align: top;
+}
+.input:invalid,
+textarea:invalid {
+  background: #fbe4e2;
+  border: 1px solid #e74c3c;
+}
+.input:valid,
+textarea:valid {
+  background: #dff8ea;
+  border: 1px solid #2ecc71;
+}
+.textarea {
+  height: 10em;
+  margin-bottom: 0.75em;
+  resize: none;
+  width: 100%;
+}
+.notification {
+  background: #dff8ea;
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+  margin-top: 1.5em;
+  opacity: 0;
+  padding: 0.75em;
+  text-align: left;
+  transition: 0.2s all ease-in-out;
+}
+.notification.show {
+  opacity: 1;
+  transition: 0.2s all ease-in-out;
+}
+.notification-error {
+  background: #fbe4e2;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
 }
 .tile {
   display: inline;

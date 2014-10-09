@@ -3,6 +3,9 @@ extends templates/master
 block title
 	| #{user.screen_name} : Weibo API Test
 
+block css
+	link(rel="stylesheet", href="/bower_components/remodal/dist/jquery.remodal.css")
+
 block content
 
 	include includes/header
@@ -12,67 +15,31 @@ block content
 		section
 
 			.tile.tile-search-result
-				#search-result
+				#search-result Use the search bar above to find a weibo
 
 				.share-buttons.hidden
-					button.button.button-share.button-share--reply Reply
-					button.button.button-share.button-share--forward Forward
-					button.button.button-share.button-share--like Like
+					button.button.button-share.button-share--reply(data-remodal-target="reply-modal", title="Reply to this weibo") Reply
+					button.button.button-share.button-share--forward(title="Forward this weibo") Forward
+					button.button.button-share.button-share--like(title="Like this weibo") Like
 
 
 			.tile.tile--naked#request-details
 
+	//- modal window used for gathering the reply content
+	.remodal-bg
+		.remodal(data-remodal-id="reply-modal")
+			h2 Reply to 
+				span.js-posters-name
+				| 's weibo:
+			textarea#reply-content.textarea
+			button.button.button-share.button-share--send-reply Send Reply
+
 block script
-	script.
+	script(src="/bower_components/remodal/dist/jquery.remodal.min.js")
 
-		function updateUI(obj) {
-
-			//- update search results
-			var pic = obj.status.original_pic
-			$("#search-result").html("<label>Weibo ID:</label>" +
-				"<div>" + obj.status.id + "</div>" +
-				"<label>User name:</label>" +
-				"<div>" + obj.status.user.screen_name + "</div>" +
-				"<label>User ID:</label>" +
-				"<div>" + obj.status.user.id + "</div>" +
-				"<label>User URL:</label>" +
-				"<a class='block' href='http://weibo.com/" + obj.status.user.id + "' title='go to " + obj.status.user.screen_name + "'s weibo page>http://weibo.com/" + obj.status.user.id + "</a>" +
-				"<label>Weibo Content:</label>" +
-				"<div>" + obj.status.text + "</div>"
-			);
-			if(pic) {
-				$("#search-result").html($("#search-result").html() +
-					"<img src='" + pic + "' alt=''>"
-				);
-			}
-
-			//- update request details
-			var parameters = "";
-			for(var item in obj.request.parameters) {
-				parameters += item + ": " + obj.request.parameters[item] + "\n";
-			}
-			$("#request-details").html("<label>Request URL:</label>" +
-				"<pre>" + obj.request.url + "</pre>" +
-				"<label>Request Type:</label>" +
-				"<pre>" + obj.request.type + "</pre>" +
-				"<label>Request Parameters:</label>" +
-				"<pre>" + parameters + "</pre>");
-		}
-
-		$("#search").on("click", function() {
-			$(this).prop("disabled", true);
-			$(".share-buttons").addClass("hidden");
-			$.ajax({
-				type: "POST",
-				url: "/search",
-				data: {
-					url: $("#query").val()
-				},
-				success: function(result) {
-					$("#search").prop("disabled", false);
-					$(".share-buttons").removeClass("hidden");
-					updateUI(result);
-				},
-				dataType: "json"
-			});
-		});
+	//- Change to your app key!
+	//- Darryl's = 3294558148
+	//- Jim's = 109545286
+	//- Remove debug=true in production
+	script(src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=109545286&debug=true")
+	script(src="/scripts/weiboTest.js")

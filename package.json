@@ -4,7 +4,7 @@
   "description": "An app for authenticating with and testing the Weibo API",
   "main": "index.coffee",
   "scripts": {
-    "start": "coffee index.coffee",
+    "start": "sudo coffee index.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
