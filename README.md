@@ -35,6 +35,8 @@ sudo echo "127.0.0.1 apple.com" >> /etc/hosts
 npm install
 ```
 
+> NOTE: you'll need to comment out lines 713-729 in node_modules/weibo/lib/tapi.js - it's out of date
+
 * Run the start command:
 
 ```
