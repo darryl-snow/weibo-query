@@ -29,6 +29,8 @@ sudo echo "127.0.0.1 apple.com" >> /etc/hosts
 
 * Edit the App Key in `/scripts/weiboTest.js` and `/views/index-loggedin.jade`
 
+> Note you'll also need to edit the encoded app key in `scripts/weiboTest.js`. To encode it, use the NodeJS package `weibo-mid`: `require('weibo-mid').encode(appkey)`.
+
 * Install dependencies:
 
 ```
@@ -51,13 +53,14 @@ npm start
 
 ## How to use it
 
-* Click the login button to login to weibo and authorise the app
-* Enter the URL of a weibo post in the search bar at the top and then click "go"
-* The weibo post will appear on the left of the page and the request made to the weibo API will appear on the right
-* Click any of the 3 social interaction buttons beneath the post - again the request details will appear on the right of the page
+* Try the share buttons on the demo post on the top-left of the page. Clicking the share buttons will open a login/authorisation popup if you are not already logged in to weibo and/or have not previously authorised the app. If you are already logged in /authorised, the reply and forward buttons will open a popup for you to complete the social interactions, and the like button will just register a like on the weibo post without any visual feedback. If you need to first login, then you will need to click the social buttons again to continue with the interaction.
+
+* Enter the URL of a weibo post in the search bar at the top and then click "go" - the weibo post will appear on the bottom left of the page and the request made to the weibo API will appear on the right
+
+* When you search for a weibo or complete a social interaction, the API request details will be shown on the top right of the page.
 
 ## Explanation
 
-Every interaction with Sina weibo requires Oauth2.0 authorisation. So you need to first send a request to the authorisation URL (which you can get using the API), then have a callback page on your server which handles the authorisation result, either displaying an error or saving the access token and user data in session storage so that they can be used to make further api requests. Once you have those stored, the user will be able to use the share buttons that interact with the weibo API.
+Every interaction with Sina weibo requires Oauth2.0 authorisation. So first you need to use the SDK to get the authorisation URL - you have to send the user to this URL, provinding your app key and callback URL as parameters. Weibo will then redirect the user back to your callback URL, a page on your server, along with an access code. That page (/auth auth.jade in this example) then needs to make a request to Weibo again with this access code as a parameter. The request result will be an access token that you can use for future API requests. This token should be stored in a session cookie. When the Weibo SDK is initialised on future visits to the site, it will check the cookie for the access token. The token expires after a fixed duration.
 
 [Email me](mailto:darryl_snow@apple.com) if you have any questions

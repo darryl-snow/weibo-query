@@ -13,6 +13,7 @@ weibo = require "weibo"
 session = require "cookie-session"
 bodyParser = require "body-parser"
 mid = require "weibo-mid"
+cookieParser = require "cookie-parser"
 
 # initialise the app
 app = express()
@@ -23,8 +24,10 @@ app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
 app.use bodyParser.json()
 app.use bodyParser.urlencoded()
+app.use cookieParser()
 app.use session
 	secret: "thisisasecret"
+
 
 
 # WEIBO SDK CONFIGURATION
@@ -67,33 +70,29 @@ weibo.get_authorization_url
 	console.error err if err
 	authURL = auth_info.auth_url
 
+
+
 # ROUTING
 # ----------------------------------
+
 
 # The root URL
 app.get "/", (req, res) ->
 
+	# grab the session details, if they exist
 	user = req.session.oauthUser
 	accessToken = req.session.accessToken
 
-	# check if the user is already logged in and authorised
-	# (i.e. there is an existing login session)
-	if !user
+	# show the index page
+	res.render "index",
+		title: "Weibo API Test"
 
-		# if not then show the login page
-		res.render "index",
-			authURL: authURL
-
-	else
-
-		# otherwise go into the app
-		res.render "index-loggedin",
-			title: "Weibo API Test"
-			user: user
 
 # Login directly
 app.get "/login", (req, res) ->
 	res.redirect authURL
+
+
 
 # This is the callback URL to handle the authentication info.
 # When users login, they are taken to the login/authorisation
@@ -131,45 +130,69 @@ app.get "/auth", (req, res) ->
 			# NOTE: need to comment out lines 713-729 in node_modules/weibo/lib/tapi.js - it's out of date
 			req.session.oauthUser = User
 			req.session.accessToken = accessToken
-			res.redirect "/"
 
-# This URL handles post requests from the page when the user submits the
-# search query to search for a particular weibo post
-app.post "/search", (req, res) ->
+			# save a cookie to note that we've authorised ok
+			res.cookie("auth", true)
 
-	# Unfortunately weibo uses a base62 encoded version of the weibo post ID
-	# as part of the URL for each weibo post. We need to grab that encoded
-	# string and decode it. Even more unfortunate is that the SDK doesn't
-	# provide a way for us to decode base62 strings so we have to use another
-	# library to do it... *sigh*
-	weibomid = req.body.url.substr req.body.url.lastIndexOf("/") + 1
-	id = mid.decode(weibomid)
+			# render the auth template - this is the page that weibo will redirect back to
+			# after they've authorised our request and granted the access token. This page
+			# will open in a popup window so should just have some JavaScript to notify the
+			# main window that authorisation is complete and then the popup window should
+			# close itself
+			res.render "auth",
+				token: accessToken
 
-	# right, now query the API to get details about that post...
-	weibo.show
-		blogtype: "weibo"
-		source: appkey
-		access_token: accessToken
-	, id, (err, status) ->
 
-		console.log err if err
+
+# this is an API to return the Weibo ID based on the MID (the last part of the URL)
+app.post "/getid", (req, res) ->
+	res.json
+		id: mid.decode(req.body.mid)
+
+
+
+# The browser-based JavaScript SDK can handle searches - the code below is just for demo / playing with
+# NodeJS SDK
+
+# # This URL handles post requests from the page when the user submits the
+# # search query to search for a particular weibo post
+# app.post "/search", (req, res) ->
+
+# 	# Unfortunately weibo uses a base62 encoded version of the weibo post ID
+# 	# as part of the URL for each weibo post. We need to grab that encoded
+# 	# string and decode it. Even more unfortunate is that the SDK doesn't
+# 	# provide a way for us to decode base62 strings so we have to use another
+# 	# library to do it... *sigh*
+# 	weibomid = req.body.url.substr req.body.url.lastIndexOf("/") + 1
+# 	id = mid.decode(weibomid)
+
+# 	# right, now query the API to get details about that post...
+# 	weibo.show
+# 		blogtype: "weibo"
+# 		source: appkey
+# 		access_token: accessToken
+# 	, id, (err, status) ->
+
+# 		console.log err if err
 		
-		# ...and return those details to the user, along with details
-		# about the request that was made (for reference)
-		res.json
-			request:
-				url: "https://api.weibo.com/2/statuses/show.json"
-				type: "GET"
-				parameters:
-					source: appkey
-					access_token: accessToken
-					id: id
-			status: status
+# 		# ...and return those details to the user, along with details
+# 		# about the request that was made (for reference)
+# 		res.json
+# 			request:
+# 				url: "https://api.weibo.com/2/statuses/show.json"
+# 				type: "GET"
+# 				parameters:
+# 					source: appkey
+# 					access_token: accessToken
+# 					id: id
+# 			status: status
+
 
 # Logout / kill the session
 app.get "/logout", (req, res) ->
 	req.session = null
-	res.send "Logged out"
+	res.redirect "/"
+
 
 # this is just to compile stylus to CSS on the fly when it's requested
 # Stylus > CSS

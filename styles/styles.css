@@ -221,6 +221,34 @@ th {
   *src: url("");
 /* Copyright (c) 1992 Adobe Systems Incorporated. All Rights Reserved. Myriad is a trademark of Adobe Systems Incorporated. */
 }
+@font-face {
+  font-family: "Apple Icons";
+  font-style: normal;
+  font-weight: 100;
+  src: url("fonts/AppleIcons-Ultralight.eot");
+  src: url("fonts/AppleIcons-Ultralight.eot?#iefix") format("embedded-opentype"), url("fonts/AppleIcons-Ultralight.woff") format("woff"), url("fonts/AppleIcons-Ultralight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Apple Icons";
+  font-style: normal;
+  font-weight: 200;
+  src: url("fonts/AppleIcons-Thin.eot");
+  src: url("fonts/AppleIcons-Thin.eot?#iefix") format("embedded-opentype"), url("fonts/AppleIcons-Thin.woff") format("woff"), url("fonts/AppleIcons-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Apple Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/AppleIcons-Text.eot");
+  src: url("fonts/AppleIcons-Text.eot?#iefix") format("embedded-opentype"), url("fonts/AppleIcons-Text.woff") format("woff"), url("fonts/AppleIcons-Text.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Apple Live Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/apple-live-icons.eot");
+  src: url("fonts/apple-live-icons.eot?") format("embedded-opentype"), url("fonts/apple-live-icons.woff") format("woff"), url("fonts/apple-live-icons.ttf") format("truetype");
+}
 html,
 body {
   font: 300 112.5%/1.65 "PingHei", "Helvetica Neue", "Helvetica", "Arial", "Verdana", "sans-serif";
@@ -255,7 +283,7 @@ html {
 html,
 body {
   background-color: #f9f9f9;
-  color: #444;
+  color: #333;
   min-height: 100%;
 }
 *,
@@ -282,7 +310,10 @@ section {
   *width: 97.9166666666667% -correction;
   *margin: 0 1.0416666666667% -correction;
   overflow: visible;
-  padding: 1.5em 0;
+  padding: 0 0 1.5em;
+}
+section:first-of-type {
+  padding-top: 1.5em;
 }
 img {
   height: auto;
@@ -327,7 +358,7 @@ img {
 }
 .share-buttons {
   margin-top: 1.5em;
-  text-align: center;
+  text-align: right;
 }
 .share-buttons.hidden {
   margin-top: 0;
@@ -420,7 +451,7 @@ textarea:valid {
   background: #dff8ea;
   border: 1px solid #2ecc71;
   color: #2ecc71;
-  margin-top: 1.5em;
+  margin: 1.5em 0;
   opacity: 0;
   padding: 0.75em;
   text-align: left;
@@ -435,41 +466,101 @@ textarea:valid {
   border: 1px solid #e74c3c;
   color: #e74c3c;
 }
+.publishButton {
+  background: #2ecc71 !important;
+  border: none !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  display: none !important;
+  font-weight: 600 !important;
+  height: auto !important;
+  padding: 0.5em 1em !important;
+  text-decoration: none !important;
+  transition: 0.2s;
+}
+.publishButton.active,
+.publishButton:active,
+.publishButton:focus,
+.publishButton:hover {
+  background: #1dbb61 !important;
+}
+.publishButton span {
+  background: none !important;
+  border: none !important;
+  color: #fff !important;
+  display: inline !important;
+  font-size: 1.25em !important;
+  height: auto !important;
+  line-height: auto !important;
+  padding: 0 !important;
+}
+.icon-reply,
+.icon-retweet {
+  cursor: pointer;
+  color: #d6d6d6;
+  -webkit-transition: color 300ms ease;
+  transition: color;
+  font-size: 0.5em;
+}
+.icon-reply.active,
+.icon-retweet.active,
+.icon-reply:active,
+.icon-retweet:active,
+.icon-reply:focus,
+.icon-retweet:focus,
+.icon-reply:hover,
+.icon-retweet:hover {
+  color: #08c;
+  transition: color;
+}
+.icon-share:after {
+  cursor: pointer;
+}
 .tile {
-  display: inline;
-  float: left;
-  overflow: hidden;
-  width: 97.9166666666667%;
-  margin: 0 1.0416666666667%;
-  *width: 97.9166666666667% -correction;
-  *margin: 0 1.0416666666667% -correction;
   background: #fff;
   box-shadow: 0 1px 1px rgba(34,34,34,0.2);
-  overflow: visible;
-  padding: 1.5em;
-}
-@media (min-width: 48em) {
-  .tile {
-    display: inline;
-    float: left;
-    overflow: hidden;
-    width: 47.9166666666667%;
-    margin: 0 1.0416666666667%;
-    *width: 47.9166666666667% -correction;
-    *margin: 0 1.0416666666667% -correction;
-    overflow: visible;
-  }
-}
-.tile h2 {
+  display: block;
+  height: auto !important;
   margin-top: 0;
+  padding: 1.5em;
+  width: auto !important;
 }
 .tile--naked {
   background: none;
   box-shadow: none;
 }
-.tile-search-result label:not(:first-of-type) {
-  display: block;
-  margin-top: 0.75em;
+.tile-type-weibo {
+  padding: 0 16px;
+}
+.tile-type-tweet .tile-content,
+.tile-type-weibo .tile-content {
+  left: 0;
+  padding: 0 1.5em;
+  position: relative !important;
+  top: auto !important;
+  transform: none;
+  -webkit-transform: none !important;
+}
+.tile-type-image .tile-share-links a {
+  color: #d6d6d6;
+  -webkit-transition: color 300ms ease;
+  transition: color;
+  font-size: 0.5em;
+}
+.tile-type-image .tile-share-links a:active,
+.tile-type-image .tile-share-links a:focus,
+.tile-type-image .tile-share-links a:hover {
+  color: #08c;
+  transition: color;
+}
+.tile-footer {
+  position: relative;
+}
+.tile-type-weibo .tile-source {
+  padding-top: 0;
+}
+html[lang="zh-CN"] .tile-type-weibo .tile-copy {
+  font-size: 1.375em;
 }
 @media print {
   * {
