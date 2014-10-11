@@ -4,9 +4,8 @@ block title
 	| #{title}
 
 block css
-	link(rel="stylesheet", href="/bower_components/remodal/dist/jquery.remodal.css")
-	link(rel="stylesheet", href="http://www.apple.com/ac/globalheader/1.0/styles/globalheader.css")
-	link(rel="stylesheet", href="http://www.apple.com/live/2014-sept-event/styles/2014-sept-event.built.css")
+	//- link(rel="stylesheet", href="http://www.apple.com/ac/globalheader/1.0/styles/globalheader.css")
+	//- link(rel="stylesheet", href="http://www.apple.com/live/2014-sept-event/styles/2014-sept-event.built.css")
 
 block content
 
@@ -14,60 +13,63 @@ block content
 
 	.container
 
-		section
+		section#tiles
 
-			//- DEMO tile
-			article.tile.tile-type-image.with-image.tile-type-weibo.with-share.with-source.state-visible.odd(data-uuid="", data-location="", data-mid="Br0MWAcwj")
-				header.tile-header
-					time.tile-timestamp(datetime="Wed Oct 08 17:11:50 +0800 2014") 5:11pm
-				blockquote.tile-content
-					.tile-image(data-tile-state="expanded")
-						img(src="http://ww1.sinaimg.cn/large/5e8492b7jw1el6u21pq92j20xc0hi7b3.jpg", alt="Apple Watch Edition - 这一系列照片 拍的太好看了！请的都是大牌摄影师。 http://t.cn/Rha0TS2")
-					cite.tile-cite.tile-cite-above
-						a.tile-source.block(href="http://weibo.com/1585746615", target="_blank")
-							img.tile-source-image(src="http://tp4.sinaimg.cn/1585746615/50/5672195547/1", alt="")
-							span.tile-source-name CallMe关
-							span.tile-source-username.block-link @CallMe关
-					p.tile-copy Apple Watch Edition - 这一系列照片 拍的太好看了！请的都是大牌摄影师。 http://t.cn/Rha0TS2 
-						a(href="http://s.weibo.com/weibo/AppleLive")
-							s #
-							b AppleLive
-							s #
-					cite.tile-cite.tile-cite-below
-						a.tile-link(href="http://www.weibo.com/1585746615/Br0MWAcwj", target="_blank", aria-label="weibo.com")
+		//- 	//- DEMO tile
+		//- 	article.tile.tile-type-image.with-image.tile-type-weibo.with-share.with-source.state-visible.odd(data-uuid="", data-location="", data-mid="Br0MWAcwj")
+		//- 		header.tile-header
+		//- 			time.tile-timestamp(datetime="Wed Oct 08 17:11:50 +0800 2014") 5:11pm
+		//- 		blockquote.tile-content
+		//- 			.tile-image(data-tile-state="expanded")
+		//- 				img(src="http://ww1.sinaimg.cn/large/5e8492b7jw1el6u21pq92j20xc0hi7b3.jpg", alt="Apple Watch Edition - 这一系列照片 拍的太好看了！请的都是大牌摄影师。 http://t.cn/Rha0TS2")
+		//- 			cite.tile-cite.tile-cite-above
+		//- 				a.tile-source.block(href="http://weibo.com/1585746615", target="_blank")
+		//- 					img.tile-source-image(src="http://tp4.sinaimg.cn/1585746615/50/5672195547/1", alt="")
+		//- 					span.tile-source-name CallMe关
+		//- 					span.tile-source-username.block-link @CallMe关
+		//- 			p.tile-copy Apple Watch Edition - 这一系列照片 拍的太好看了！请的都是大牌摄影师。 http://t.cn/Rha0TS2 
+		//- 				a(href="http://s.weibo.com/weibo/AppleLive")
+		//- 					s #
+		//- 					b AppleLive
+		//- 					s #
+		//- 			cite.tile-cite.tile-cite-below
+		//- 				a.tile-link(href="http://www.weibo.com/1585746615/Br0MWAcwj", target="_blank", aria-label="weibo.com")
 
-				footer.tile-footer
-					aside.tile-share
-						ul.tile-share-links
-							li.tile-share-link
-								//- note: in order for this widget to work, there needs to be an 'mid' attribute
-								a.reply-widget.icon.icon-reply(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=Br0MWAcwj&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=comment", target="_blank", data-share="reply", aria-label="Reply")
-							li.tile-share-link
-								//- note: in order for this widget to work, there needs to be an 'mid' attribute
-								a.forward-widget.icon.icon-retweet(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=Br0MWAcwj&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=forward", target="_blank", data-share="retweet", aria-label="Retweet")
-							li.tile-share-link
-								//- weibo doesn't have a like widget for other weibo posts, only webpages etc.
-								//- so this button will use the JS SDK to query the API directly
-								a.icon.icon-favorite.button-share--like(href="#", data-share="favorite", aria-label="Favorite")
+		//- 		footer.tile-footer
+		//- 			aside.tile-share
+		//- 				ul.tile-share-links
+		//- 					li.tile-share-link
+		//- 						//- note: in order for this widget to work, there needs to be an 'mid' attribute
+		//- 						a.reply-widget.icon.icon-reply(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=Br0MWAcwj&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=comment", target="_blank", data-share="reply", aria-label="Reply")
+		//- 					li.tile-share-link
+		//- 						//- note: in order for this widget to work, there needs to be an 'mid' attribute
+		//- 						a.forward-widget.icon.icon-retweet(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=Br0MWAcwj&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=forward", target="_blank", data-share="retweet", aria-label="Retweet")
+		//- 					li.tile-share-link
+		//- 						//- weibo doesn't have a like widget for other weibo posts, only webpages etc.
+		//- 						//- so this button will use the JS SDK to query the API directly
+		//- 						a.icon.icon-favorite.button-share--like(href="#", data-share="favorite", aria-label="Favorite")
 
-			//- This is where the API request details will be displayed
-			.tile.tile--naked#request-details
+		//- 	//- This is where the API request details will be displayed
+		//- 	.tile.tile--naked#request-details
 
-		section
+		//- section
 
-			//- This tile is where search results will appear - when you search for a weibo using
-			//- search field at the top of the page
-			article.tile.tile-type-image.with-image.tile-type-weibo.with-share.with-source.state-visible.odd.search-results-tile(data-uuid="", data-location="", data-mid="")
-				#search-result Use the search bar above to find a weibo to load in here
-				footer.tile-footer.hidden
-					aside.tile-share
-						ul.tile-share-links
-							li.tile-share-link
-								a.reply-widget.icon.icon-reply(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=comment", target="_blank", data-share="reply", aria-label="Reply")
-							li.tile-share-link
-								a.forward-widget.icon.icon-retweet(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=forward", target="_blank", data-share="retweet", aria-label="Retweet")
-							li.tile-share-link
-								a.icon.icon-favorite.button-share--like(href="#", data-share="favorite", aria-label="Favorite")
+		//- 	//- This tile is where search results will appear - when you search for a weibo using
+		//- 	//- search field at the top of the page
+		//- 	article.tile.tile-type-image.with-image.tile-type-weibo.with-share.with-source.state-visible.odd.search-results-tile(data-uuid="", data-location="", data-mid="")
+		//- 		#search-result Use the search bar above to find a weibo to load in here
+		//- 		footer.tile-footer.hidden
+		//- 			aside.tile-share
+		//- 				ul.tile-share-links
+		//- 					li.tile-share-link
+		//- 						a.reply-widget.icon.icon-reply(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=comment", target="_blank", data-share="reply", aria-label="Reply")
+		//- 					li.tile-share-link
+		//- 						a.forward-widget.icon.icon-retweet(href="http://widget.weibo.com/dialog/PublishWeb.php?mid=&refer=y&tag=AppleLive&language=zh_cn&app_src=aE3ae&button=forward", target="_blank", data-share="retweet", aria-label="Retweet")
+		//- 					li.tile-share-link
+		//- 						a.icon.icon-favorite.button-share--like(href="#", data-share="favorite", aria-label="Favorite")
+
+	include includes/footer
+
 
 block script
 	//- Change to your app key!

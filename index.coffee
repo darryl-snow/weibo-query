@@ -2,7 +2,7 @@
 # and store session data. This server side code will need to use a Weibo
 # SDK to interact with Weibo and process the authentication. Here we're
 # using the NodeJS SDK, but there are others available here:
-# 
+# http://open.weibo.com/wiki/SDK
 
 # require dependencies
 express = require "express"
@@ -41,6 +41,7 @@ app.use session
 appkey = "109545286"
 secret = "20fbd24d7a166fc66e58a553efa8597c"
 
+# Change this to whatever your server-side authorisation page will be
 oauthCallbackUrl = "http://apple.com/auth"
 authURL = ""
 accessToken = ""
@@ -62,7 +63,8 @@ weibo.oauth
 		process.nextTick callback
 
 # get the URL that the user will need to go to in order
-# to authorise your app
+# to authorise your app. the client-side SDK can also get this
+# URL so this is not really needed here - just for demo
 weibo.get_authorization_url
 	blogtype: "weibo"
 	oauth_callback: oauthCallbackUrl
@@ -80,8 +82,8 @@ weibo.get_authorization_url
 app.get "/", (req, res) ->
 
 	# grab the session details, if they exist
-	user = req.session.oauthUser
-	accessToken = req.session.accessToken
+	# user = req.session.oauthUser
+	# accessToken = req.session.accessToken
 
 	# show the index page
 	res.render "index",

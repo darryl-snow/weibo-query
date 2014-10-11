@@ -1,0 +1,20 @@
+.footer
+	background 	white
+	border-top 	1px solid #ccc
+	bottom 		0
+	cursor 		pointer
+	height 		0
+	left		0
+	opacity 	0.4
+	padding 	$spacing
+	position 	absolute
+	transition 	$fast-transition
+	transform 	translateZ(0)
+	width		100%
+
+	+ActiveFocusHover()
+		opacity 1
+
+	&.open
+		height 	50%
+		opacity 1

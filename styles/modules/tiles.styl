@@ -1,48 +1,45 @@
 .tile
+	column(12)
 	background 			white
 	box-shadow 			0 1px 1px rgba(black, 0.2)
-	display 			block
-	height 				auto !important
-	margin-top 			0
+	margin-bottom 		$spacing
 	padding 			$spacing
-	width				auto !important	
 
-	&--naked
-		background 		none
-		box-shadow 		none
+	@media $lap
+		column(6)
 
-.tile-type-weibo
-	padding 			0 16px
+// .tile-type-weibo
+// 	padding 			0 16px
 
-.tile-type-tweet .tile-content,
-.tile-type-weibo .tile-content
-	left 				0
-	padding 			0 $spacing
-	position 			relative !important
-	top 				auto !important
-	transform 			none !important
-	-webkit-transform 	none !important	
+// .tile-type-tweet .tile-content,
+// .tile-type-weibo .tile-content
+// 	left 				0
+// 	padding 			0 $spacing
+// 	position 			relative !important
+// 	top 				auto !important
+// 	transform 			none !important
+// 	-webkit-transform 	none !important	
 
-.tile-type-image .tile-share-links a
-	color 				#d6d6d6
-	-webkit-transition 	color 300ms ease
-	transition 			color 300ms ease
-	font-size 			0.5em
+// .tile-type-image .tile-share-links a
+// 	color 				#d6d6d6
+// 	-webkit-transition 	color 300ms ease
+// 	transition 			color 300ms ease
+// 	font-size 			0.5em
 
-.tile-type-image .tile-share-links a:active,
-.tile-type-image .tile-share-links a:focus,
-.tile-type-image .tile-share-links a:hover
-	color				#08c
-	transition 			color 300ms ease
+// .tile-type-image .tile-share-links a:active,
+// .tile-type-image .tile-share-links a:focus,
+// .tile-type-image .tile-share-links a:hover
+// 	color				#08c
+// 	transition 			color 300ms ease
 
-.tile-footer
-	position 			relative
+// .tile-footer
+// 	position 			relative
 
-.tile-type-weibo .tile-source
-	padding-top 		0
+// .tile-type-weibo .tile-source
+// 	padding-top 		0
 
-html[lang="zh-CN"] .tile-type-weibo .tile-copy
-	font-size 			1.375em
+// html[lang="zh-CN"] .tile-type-weibo .tile-copy
+// 	font-size 			1.375em
 
 // .tile
 // 	column(12)
