@@ -41,6 +41,7 @@ var weiboTest = {
 		user: {
 			name: "CallMe关",
 			screen_name: "CallMe关",
+			id: "1585746615",
 			profile_image_url: "http://tp4.sinaimg.cn/1585746615/180/5672195547/1"
 		}
 	}
@@ -73,8 +74,14 @@ var weiboTest = {
 				// parse the time to put in the top left of the tile
 				var weiboHours = (new Date(tile.created_at).getHours() > 12)? new Date(tile.created_at).getHours() -12 : new Date(tile.created_at).getHours();
 				var weiboMinutes = new Date(tile.created_at).getMinutes();
-				var ampm = (new Date(tile.created_at).getHours() >= 12)? "pm" : "am";
-				var weiboTime = weiboHours + ":" + weiboMinutes + ampm;
+				var ampm = (new Date(tile.created_at).getHours() >= 12)? "下午" : "上午";
+				var weiboTime = ampm + " " + weiboHours + ":" + weiboMinutes;
+
+				var pic = tile.original_pic;
+				if(pic)
+					pic = "		<div class='tile-image' data-tile-state='expanded'><img src='" + pic + "' alt=''></div>";
+				else
+					pic = "";
 
 				// render a tile template to the page
 				weiboTest.el.tiles.append(
@@ -83,9 +90,10 @@ var weiboTest = {
 					"		<time class='tile-timestamp' datetime='" + tile.created_at + "'>" + weiboTime + "</time>" +
 					"	</header>" +
 					"	<blockquote class='tile-content'>" +
+					pic + 
 					"		<cite class='tile-cite tile-cite-above'>" +
-					"			<a class='tile-source block' href='http://weibo.com/" + tile.user.id +"' target='_blank'>" +
-					"				<img class='tile-source-image' src='" + tile.user.profile_image_url + "' alt=''>" +
+					"			<a class='tile-source' href='http://weibo.com/" + tile.user.id +"' target='_blank'>" +
+					"				<img class='tile-source-image' src='" + tile.user.profile_image_url + ".jpg' alt=''>" +
 					"				<span class='tile-source-name'>" + tile.user.name + "</span>" +
 					"				<span class='tile-source-username'>@" + tile.user.screen_name + "</span>" +
 					"			</a>" +
@@ -96,7 +104,7 @@ var weiboTest = {
 					"			</a>" +
 					"		</p>" +
 					"		<cite class='tile-cite tile-cite-below'>" +
-					"			<a class='tile-link' href='" + weiboTest.el.searchQuery.val() + "' target='_blank' aria-label='weibo.com'></a>" +
+					"			<a class='tile-link' href='http://weibo.com/" + tile.user.id + "/" + tile.mid + "' target='_blank' aria-label='weibo.com'></a>" +
 					"		</cite>" +
 					"	</blockquote>" +
 					"	<footer class='tile-footer'>" +
@@ -120,6 +128,10 @@ var weiboTest = {
 			}
 
 		}
+
+		weiboTest.el.forwardButton = $(".button-forward");
+		weiboTest.el.likeButton = $(".button-like");
+		weiboTest.el.replyButton = $(".button-reply");
 
 		//- add event listeners to the UI once all tiles
 		// have been rendered
@@ -209,7 +221,7 @@ var weiboTest = {
 	 */
 	login: function() {
 
-		openWindow("/login", "登录微博");
+		weiboTest.openWindow("/login", "登录微博");
 
 	},
 
@@ -393,12 +405,14 @@ var weiboTest = {
 	 */
 	reply: function(e) {
 
+		if(e)
+			e.preventDefault();
+
 		var target = "";
 		var id = "";
 
 		if(e) {
 			// the function was called from a button click
-			e.preventDefault();
 			target = $(this).attr("href");
 			id = $(".tile[data-mid=" + $(this).data("for-post") + "]").data("id");
 		} else {
@@ -442,6 +456,9 @@ var weiboTest = {
 	 * API: http://open.weibo.com/wiki/2/statuses/repost
 	 */
 	forward: function(e) {
+
+		if(e)
+			e.preventDefault();
 
 		var target = "";
 		var id = "";
@@ -491,6 +508,9 @@ var weiboTest = {
 	 * API: http://open.weibo.com/wiki/2/attitudes/create
 	 */
 	like: function(e) {
+
+		if(e)
+			e.preventDefault();
 
 		var id = "";
 

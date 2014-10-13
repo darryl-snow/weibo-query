@@ -262,6 +262,7 @@ body {
 }
 a {
   color: #3498db;
+  text-decoration: none;
 }
 a.block {
   display: block;
@@ -286,7 +287,6 @@ body {
   background-color: #f9f9f9;
   color: #333;
   min-height: 100%;
-  overflow: hidden;
 }
 *,
 *:before,
@@ -369,16 +369,17 @@ img {
 .footer {
   background: #fff;
   border-top: 1px solid #ccc;
-  bottom: 0;
+  bottom: -0.75em;
   cursor: pointer;
   height: 0;
   left: 0;
   opacity: 0.4;
   padding: 1.5em;
-  position: absolute;
+  position: fixed;
   transition: 0.2s all ease-in-out;
   transform: translateZ(0);
   width: 100%;
+  z-index: 100;
 }
 .footer.active,
 .footer:active,
@@ -449,6 +450,35 @@ label {
 }
 .header .login * {
   vertical-align: middle;
+}
+@font-face {
+  font-family: "icomoon";
+  src: url("fonts/icomoon.eot?-s1r9m5");
+  src: url("fonts/icomoon.eot?#iefix-s1r9m5") format("embedded-opentype"), url("fonts/icomoon.woff?-s1r9m5") format("woff"), url("fonts/icomoon.ttf?-s1r9m5") format("truetype"), url("fonts/icomoon.svg?-s1r9m5#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: "icomoon";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+/* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-reply:before {
+  content: "\e602";
+}
+.icon-retweet:before {
+  content: "\e601";
+}
+.icon-favorite:before {
+  content: "\e600";
 }
 .input,
 textarea {
@@ -574,7 +604,8 @@ input {
   background: #fff;
   box-shadow: 0 1px 1px rgba(34,34,34,0.2);
   margin-bottom: 1.5em;
-  padding: 1.5em;
+  padding: 0.75em;
+  position: relative;
 }
 @media (min-width: 48em) {
   .tile {
@@ -586,6 +617,129 @@ input {
     *width: 47.9166666666667% -correction;
     *margin: 0 1.0416666666667% -correction;
   }
+}
+.tile-header {
+  font-size: 0.9em;
+  line-height: 44px;
+}
+.tile-footer {
+  font-size: 0.875em;
+  height: 48px;
+  line-height: 48px;
+  width: 100%;
+}
+.tile-share {
+  float: right;
+  margin-right: 16px;
+}
+.tile-cite {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
+}
+.tile-cite:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.tile-cite-above {
+  border-bottom: 1px solid #d6d6d6;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.tile-cite-below {
+  border-top: 1px solid #d6d6d6;
+  padding-top: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+.tile-source {
+  height: 42px;
+  display: inline-block;
+  font-style: normal;
+  line-height: 1.3;
+  padding-left: 74px;
+  position: relative;
+  left: 50%;
+  width: auto;
+  height: 51px;
+  z-index: 1;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.tile-source:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.tile-source-name {
+  color: #333;
+  display: block;
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 1.125em;
+}
+.tile-source-username {
+  display: block;
+  color: #08c;
+  font-size: 0.8125em;
+}
+.tile-source-image {
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+}
+.tile-copy {
+  font-size: 1.375em;
+  line-height: 1.3;
+  font-weight: 200;
+  margin: 0 auto;
+  text-align: center;
+}
+.tile-link {
+  line-height: 1.55;
+  margin-left: 0;
+  font-size: 0.875em;
+}
+.tile-link:after {
+  background: url("http://www.apple.com/live/images/weibo.svg") center center no-repeat;
+  background-size: contain;
+  content: "";
+  display: inline-block;
+  width: 2.8667em;
+  height: 2.1333em;
+}
+.tile-share-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tile-share-links li {
+  margin: 0;
+  padding: 0;
+}
+.tile-share-link {
+  float: left;
+  margin-left: 22px !important;
+}
+.tile-share-links a {
+  color: #d6d6d6;
+  font-size: 1em;
+  -webkit-transition: color 300ms ease;
+  transition: color;
+}
+.tile-share-links a.active,
+.tile-share-links a:active,
+.tile-share-links a:focus,
+.tile-share-links a:hover {
+  color: #3498db;
+}
+.tile-image {
+  margin-bottom: 1.5em;
 }
 @media print {
   * {
